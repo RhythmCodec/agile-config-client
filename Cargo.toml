@@ -5,6 +5,7 @@ edition = "2024"
 rust-version = "1.85"
 description = "AgileConfig client that integrates with the config crate as an AsyncSource."
 license = "MIT"
+repository = "https://github.com/RhythmCodec/agile-config-client"
 readme = "README.md"
 keywords = ["agileconfig", "config", "configuration"]
 categories = ["config"]
