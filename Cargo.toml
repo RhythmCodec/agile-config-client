@@ -1,0 +1,55 @@
+[package]
+name = "agile-config-client"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "AgileConfig client that integrates with the config crate as an AsyncSource."
+license = "MIT"
+readme = "README.md"
+keywords = ["agileconfig", "config", "configuration"]
+categories = ["config"]
+include = ["src/**/*", "Cargo.toml", "README.md", "LICENSE", "examples/**/*"]
+
+[features]
+default = []
+# AES-ECB cache encryption compatible with the C# client.
+cache-encrypt = ["dep:aes", "dep:cipher", "dep:ecb", "dep:sha1"]
+
+[package.metadata.docs.rs]
+all-features = true
+
+[dependencies]
+aes = { version = "0.9", optional = true }
+async-trait = "0.1"
+base64 = "0.23"
+cipher = { version = "0.5", optional = true, features = ["block-padding", "alloc"] }
+config = { version = "0.15", default-features = false, features = ["async"] }
+ecb = { version = "0.2", optional = true }
+futures-util = { version = "0.3", default-features = false, features = ["sink"] }
+md-5 = "0.11"
+reqwest = { version = "0.13", default-features = false, features = ["json", "native-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha1 = { version = "0.11", optional = true }
+thiserror = "2"
+tokio = { version = "1", features = ["rt", "time", "sync", "macros", "net"] }
+tokio-tungstenite = { version = "0.30", features = ["native-tls"] }
+tokio-util = "0.7"
+tracing = "0.1"
+urlencoding = "2"
+
+[dev-dependencies]
+tempfile = "3"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "net", "io-util"] }
+wiremock = "0.6"
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+module_name_repetitions = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
